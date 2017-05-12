@@ -3,21 +3,21 @@
 
 >学习所使用的文件
 
-###课程总结
+### 课程总结 ###
 >服务器端可以用$_REQUEST 同时获取post get方式传输的文件
 
-#get注意点
+## get注意点 ##
 
 1. 传输要用encodeURI中文转码
 2. 注意缓存
 
-#post注意点
+## post注意点 ##
 
 1. 请求头的设置
 2. ....
 
 
-#json
+## json ##
 
 -  parseInt
 -  stringify
