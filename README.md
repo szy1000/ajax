@@ -17,7 +17,8 @@
 2. ....
 
 
-#json
+ #json
+-
 -  parseInt
 -  stringify
 -  key值必须为字符串
