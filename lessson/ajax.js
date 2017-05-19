@@ -12,12 +12,14 @@ function ajax(option) {
 	}else{
 		method = option.method;
 	}
+  console.log(method);
 
 	if(option.async === undefined){
 		async = true;
 	}else{
 		async = option.async;
 	}
+  console.log(async);
 
 	var xmlhttp = null;
 
