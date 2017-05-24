@@ -81,18 +81,24 @@
 						$('#download a').removeClass('show');
 
 						var len = 0;
-						for(var a in data.data.brs){
+						var arr = [];
+						for(var key in data.data.brs){
+							// alert(data.data.brs[a]);
+							if(data.data.brs.hasOwnProperty(key)){
+								arr.push(data.data.brs[key])
+							}
 							len++;
 						}
+						// alert(arr);
 						// alert(len);
 						for(var i = 0 ; i < len; i++){
 							$('#download  a').eq(i).addClass('show');
 						}
 						for(var i=0; i<= $('#download a').length; i++){
-							$('#download  a').eq(i).attr("href", data.data.brs[240*(i+1)])
-							if( i == 3) {
-								$('#download  a').eq(i).attr("href", data.data.brs[1080]);
-							}
+							$('#download  a').eq(i).attr("href", arr[i])
+							// if( i == 3) {
+							// 	$('#download  a').eq(i).attr("href", data.data.brs[1080]);
+							// }
 						}
 
 					}
