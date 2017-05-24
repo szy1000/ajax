@@ -21,11 +21,11 @@
 		  	width: 100%;
 		  }
 		}
-		#download a{
+		#download a,#source button{
 			display: none;
 		}
 
-		#download a.show{
+		#download a.show , #source button.show{
 			display: inline-block;
 		}
 	</style>
@@ -79,6 +79,7 @@
 						$('#video').attr("src",link);
 
 						$('#download a').removeClass('show');
+						$('#source button').removeClass('show');
 
 						var len = 0;
 						var arr = [];
@@ -91,22 +92,27 @@
 						}
 						// alert(arr);
 						// alert(len);
+
 						for(var i = 0 ; i < len; i++){
 							$('#download  a').eq(i).addClass('show');
+							$('#source  button').eq(i).addClass('show');
 						}
-						for(var i=0; i<= $('#download a').length; i++){
-							$('#download  a').eq(i).attr("href", arr[i])
-							// if( i == 3) {
-							// 	$('#download  a').eq(i).attr("href", data.data.brs[1080]);
-							// }
+
+						for(var i=0; i<= $('#source button').length; i++){
+							$('#source  button').eq(i).attr("href", arr[i])
 						}
+
+
+						$('#download a').each(function(i){
+							$(this).attr('href', arr[i]);
+						})
 
 					}
 				})
 			})
 
 
-			$('#download').delegate('a','click',function(){
+			$('#source').delegate('button','click',function(){
 				$('#video').attr("src",$(this).attr('href'));
 			})
 		})
@@ -116,7 +122,15 @@
 	<video src="" id="video" poster="1.png" autoplay controls></video><br/>
 	<input type="text" id="ipt" value="fade">
 	<input type="button" id="btn" value="确定">
+	<div id="source">
+		<p>切换视频源</p>
+		<button>(240P)</button>
+		<button>(480P)</button>
+		<button>(720P)</button>
+		<button>(1080P)</button>
+	</div>
 	<div id="download">
+		<p>下载列表</p>
 		<a href="javascript:(0);" download>手机(240)</a>
 		<a href="javascript:(0);" download>高清(480)</a>
 		<a href="javascript:(0);" download>超高清(720)</a>
