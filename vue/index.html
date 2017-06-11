@@ -9,6 +9,9 @@
 	<script src="vue-resource@1.3.4"></script>
 	<script src="jquery-1.7.min.js"></script>
 	<style>
+		video{
+			width: 600px;
+		}
 		ul{
 			margin: 0;
 			padding: 0;
@@ -25,14 +28,23 @@
 </head>
 <body>
 	<div id="app">
-		<div v-if="video">{{video.data.cover}}</div>
-		<video controls v-if="video" :poster="video.data.cover" :src="video.data.brs[240]"></video>
+		<audio src="">
+			
+		</audio>
+		<!-- <p v-if="lyric">{{lyric}}</p> -->
+		<video autoplay controls v-if="video" :poster="video.data.cover" :src="video.data.brs[240]">
+			
+			<!-- <track :src="lyric.lrc.lyric" srclang="zh" kind="subtitles" label="中文" default> -->
+		</video>
 		<br>
 		<input type="text" value="fade" v-model = "name">
 		<button v-on:click = "get">搜索</button>
 		<ul v-if="this.response">
 			<li v-for="(item,index) in this.response.result.mvs" id="item.id" @click="searchMV(item.id)">
 				<img :src="item.cover" alt="">
+				<p>歌曲名：{{item.artistName}}</p>
+				<p>播放热度： {{item.playCount}}</p>
+				<p v-if="item.briefDesc">简介：{{item.briefDesc}}</p>
 			</li>
 		</ul>
 		<div v-if="this.response"> 返回总数: {{this.response.result.mvCount}}</div>
@@ -48,10 +60,13 @@
 					},
 					video: {
 						type: Object
+					},
+					lyric: {
+						type: Object
 					}
 				},
 				data: {
-					name: 'fade',
+					name: '悟空',
 				},
 				methods: {
 					get: function(){
@@ -64,13 +79,19 @@
 						// })
 						this.$http.get('https://api.imjad.cn/cloudmusic/?type=search&search_type=1004&s='+this.name+'&t='+new Date()).then((response) => {
 								this.response = response.body;
+							}),
+						this.$http.get('https://api.imjad.cn/cloudmusic/?type=search&search_type=1004&s='+this.name+'&t='+new Date()).then((response) => {
+								this.response = response.body;
 							})
 						},
 					searchMV: function(id){
-						this.$http.get('https://api.imjad.cn/cloudmusic/?type=mv&id='+id+'&br=128000&t='+new Date()).then((response) => {
+						this.$http.get('https://api.imjad.cn/cloudmusic/?type=mv&id='+id+'&br=128000&limit=20&t='+new Date()).then((response) => {
 						this.video = response.body;
+						}),
+						this.$http.get('https://api.imjad.cn/cloudmusic/?type=lyric&id='+id+'&br=128000&limit=20&t='+new Date()).then((response) => {
+						this.lyric = response.body;
 						})
-					} 
+					}
 				},
 				created(){
 					this.$http.get('https://api.imjad.cn/cloudmusic/?type=search&search_type=1004&s='+this.name+'&t='+new Date()).then((response) => {
