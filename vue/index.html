@@ -54,19 +54,11 @@
 		window.onload = function(){
 			var app = new Vue({
 				el: '#app',
-				props:{
-					response:{
-						type: Object
-					},
-					video: {
-						type: Object
-					},
-					lyric: {
-						type: Object
-					}
-				},
 				data: {
 					name: '悟空',
+					response: null,
+					lyric:null,
+					video:null
 				},
 				methods: {
 					get: function(){
