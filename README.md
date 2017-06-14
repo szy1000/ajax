@@ -34,3 +34,9 @@
 
 [戳我![图片](https://avatars3.githubusercontent.com/u/17595642?v=3&s=460)](https://szy1000.github.io/ajax/demo/)
 
+
+vue
+重构了一遍
+[戳我!](https://szy1000.github.io/ajax/vue/)
+
+

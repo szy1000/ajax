@@ -8,6 +8,8 @@
 	<script src="vue.js"></script>
 	<script src="vue-resource@1.3.4"></script>
 	<script src="jquery-1.7.min.js"></script>
+	<script src="progress/nprogress.js"></script>
+	<link rel="stylesheet" href="progress/nprogress.css">
 	<style>
 		video{
 			width: 600px;
@@ -24,16 +26,40 @@
 		ul li img{
 			width: 100%;
 		}
+		.progress{
+			position: fixed;
+			left: 0;
+			top: 0;
+			height: 4px;
+			width: 100%;
+		}
+		.progress .onload{
+			height: 4px;
+			background-color: red;
+		}
 	</style>
 </head>
 <body>
+	<script type="text" id="splash-template">
+    <div class="splash card">
+        <div role="spinner">
+            <div class="spinner-icon"></div>
+        </div>
+        <p class="lead" style="text-align:center">不要回来，马上走开...</p>
+        <div class="progress">
+            <div class="mybar" role="bar">
+            </div>
+        </div>
+    </div>
+  </script>
+
+	<div class="progress" id="progress">
+		<div class="onload" id="onload"></div>
+	</div>
+	<!-- <iframe src="https://www.github.com/" frameborder="0" width="50px" height="60px"></iframe> -->
+
 	<div id="app">
-		<audio src="">
-			
-		</audio>
-		<!-- <p v-if="lyric">{{lyric}}</p> -->
 		<video autoplay controls v-if="video" :poster="video.data.cover" :src="video.data.brs[240]">
-			
 			<!-- <track :src="lyric.lrc.lyric" srclang="zh" kind="subtitles" label="中文" default> -->
 		</video>
 		<br>
@@ -51,13 +77,24 @@
 	</div>
 
 	<script>
+		$(function(){
+      NProgress.configure({
+          template: $('#splash-template').html()
+      });
+      NProgress.start();
+    });
+    $(window).load(function(){
+        NProgress.done();
+    })
+	
 		window.onload = function(){
 			var app = new Vue({
 				el: '#app',
 				data: {
 					name: '悟空',
 					response: null,
-					video: null,
+					lyric:null,
+					video:null
 				},
 				methods: {
 					get: function(){
@@ -85,9 +122,9 @@
 					}
 				},
 				created(){
-					// this.$http.get('https://api.imjad.cn/cloudmusic/?type=search&search_type=1004&s='+this.name+'&t='+new Date()).then((response) => {
-					// 	this.response = response.body;
-					// })
+					this.$http.get('https://api.imjad.cn/cloudmusic/?type=search&search_type=1004&s='+this.name+'&t='+new Date()).then((response) => {
+						this.response = response.body;
+					})
 					
 					// var _this = this;
 					// $.ajax({
