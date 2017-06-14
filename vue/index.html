@@ -54,19 +54,10 @@
 		window.onload = function(){
 			var app = new Vue({
 				el: '#app',
-				props:{
-					response:{
-						type: Object
-					},
-					video: {
-						type: Object
-					},
-					lyric: {
-						type: Object
-					}
-				},
 				data: {
 					name: '悟空',
+					response: null,
+					video: null,
 				},
 				methods: {
 					get: function(){
@@ -94,13 +85,16 @@
 					}
 				},
 				created(){
-					this.$http.get('https://api.imjad.cn/cloudmusic/?type=search&search_type=1004&s='+this.name+'&t='+new Date()).then((response) => {
-						this.response = response.body;
-					})
+					// this.$http.get('https://api.imjad.cn/cloudmusic/?type=search&search_type=1004&s='+this.name+'&t='+new Date()).then((response) => {
+					// 	this.response = response.body;
+					// })
+					
 					// var _this = this;
 					// $.ajax({
 					// 	url:"https://api.imjad.cn/cloudmusic/?type=search&search_type=1004&s="+_this.name+"&t="+new Date(),
 					// 	success: function(data){
+					// 		console.log(this);
+					// 		console.log(_this);
 					// 		_this.response = data;
 					// 	}
 					// })
