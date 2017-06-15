@@ -7,6 +7,29 @@ ul li{
 }
 ul li img{
 	width: 100%;
+	height: 100%;
+}
+.mv li{
+	position: relative;
+	margin-bottom: 15px;
+	height: 169px;
+}
+.mv li p{
+	position: absolute;
+	box-sizing: border-box;
+	margin: 0;
+	width: 100%;
+	background-color: rgba(255,255,255,.7);
+}
+.mv li .sing{
+	padding: 5px;
+	left: 0;
+	bottom: 0;
+}
+.mv li .playCount{
+	padding: 5px;
+	right: 0;
+	top: 0;
 }
 .progress{
 	position: fixed;
@@ -28,10 +51,10 @@ ul li img{
 	video{
 		width: 100%;
 	}
-	.item{
+	.mv .item{
 		box-sizing: border-box;
-		padding: 0 7px;
-		width: 50%;
+		margin: 0 1%;
+		width: 48%;
 	}
 }
 
@@ -43,10 +66,10 @@ ul li img{
 	video{
 		width: 100%;
 	}
-	.item{
+	.mv .item{
 		box-sizing: border-box;
-		padding: 0 7px;
-		width: 100%;
+		margin: 0 1% 15px 1%;
+		width: 98%;
 	}
 	.comments li{
 		margin-bottom: 3px;
