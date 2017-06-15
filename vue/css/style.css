@@ -20,6 +20,23 @@ ul li img{
 	height: 4px;
 	background-color: red;
 }
+@media screen and (max-width: 415px) {
+	.wrapper{
+		width: 100%;
+		overflow: hidden;
+	}
+	video{
+		width: 100%;
+	}
+	.item{
+		box-sizing: border-box;
+		padding: 0 7px;
+		width: 50%;
+	}
+	body{
+		/*// background-color: red*/
+	}
+}
 
 @media screen and (max-width: 320px) {
 	.wrapper{
@@ -34,7 +51,5 @@ ul li img{
 		padding: 0 7px;
 		width: 100%;
 	}
-	body{
-		// background-color: red
-	}
 }
+
