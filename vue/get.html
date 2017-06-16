@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="vue.js"></script>
+	<script src="vue-resource@1.3.4"></script>
+</head>
+<body>
+	<div id="app">
+		<button @click="show">111</button>
+	</div>
+	<script>
+		new Vue({
+			el: '#app',
+			data:{
+				type:null,
+				name: null,
+				arr:null,
+				song: null
+			},
+			methods:{
+				show: function () {
+					alert(this.name)
+				}
+			},
+			created: function(){
+					const type = 'type', name = 'name';
+					var _this = this;
+					var url = window.location.toString();
+					this.arr = url.split("?")[1];
+					this.name = this.arr.split("&");
+					for(var i=0; i < this.name.length; i++){
+						if(_this.name[i].split("=")[0] == type){
+							_this.type = _this.name[i].split("=")[1];
+						}
+						if(_this.name[i].split("=")[0] == name){
+							_this.name = _this.name[i].split("=")[1];
+						}
+					}
+					this.type = this.arr.split("=")[1];
+
+					this.$http.get('https://api.imjad.cn/cloudmusic/?type='+this.type+'&s='+this.name+'&t='+new Date()).then((response) => {
+						this.song = response.body;
+					});
+			}
+			// created(){ 
+			// 	var _this = this;
+			// 	function get(){
+			// 	};
+			// 	this.$http.get('https://api.imjad.cn/cloudmusic/?type=search&s='+this.name+'&t='+new Date()).then((response) => {
+			// 			this.song = response.body;
+			// 		});
+			// } 
+
+		})
+	</script>
+</body>
+</html>
