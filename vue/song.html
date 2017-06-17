@@ -8,7 +8,26 @@
 </head>
 <body>
 	<div id="app">
-		<button @click="show">111</button>
+		<div class="wrapper">
+			<div v-if="this.song"> Song返回总数: {{this.song.result.songCount}}</div>
+			<div>
+				<h3>音频播放区域</h3>
+				<audio  controls autoplay v-if="this.mp3" :src="this.mp3.data[0].url"></audio>
+				<ul v-if="this.comments" class="comments">
+					<li v-for="(item,index) in this.comments.hotComments">
+						<p>用户：{{item.user.nickname}}</p>
+						<p>评论：{{item.content}}</p>
+					</li>
+				</ul>
+			</div>
+
+			<ul v-if="this.song">
+				<li v-for="(item,index) in this.song.result.songs" id="item.id" @click="searchSong(item.id)">
+					<p>{{item.name}}</p>
+					<img :src="item.al.picUrl" alt="">
+				</li>
+			</ul>
+		</div>
 	</div>
 	<script>
 		new Vue({
@@ -18,35 +37,41 @@
 				name: null,
 				arr:null,
 				song: null,
-				id: null
+				id: null,
+				mp3: null,
+				scomments: null,
+				song_id: null
 			},
 			methods:{
-				show: function () {
-					alert(this.id)
-				}
+				searchSong: function(song_id){
+					this.$http.get('https://api.imjad.cn/cloudmusic/?type=song&id='+song_id+'&br=128000&limit=20&t='+new Date()).then((response) => {
+						this.mp3 = response.body;
+					})
+					this.$http.get('https://api.imjad.cn/cloudmusic/?type=comments&id='+song_id+'&br=128000&limit=20&t='+new Date()).then((response) => {
+						this.comments = response.body;
+						console.log(this.comments);
+					})
+				},
 			},
 			created: function(){
-					const type = 'type', name = 'name', id = 'id';
-					var _this = this;
-					var url = window.location.toString();
-					this.arr = url.split("?")[1];
-					this.name = this.arr.split("&");
-					for(var i=0; i < this.name.length; i++){
-						if(_this.name[i].split("=")[0] == type){
-							_this.type = _this.name[i].split("=")[1];
-						}
-						// if(_this.name[i].split("=")[0] == name){
-						// 	_this.name = _this.name[i].split("=")[1];
-						// }
-						if(_this.name[i].split("=")[0] == id){
-							_this.id = _this.name[i].split("=")[1];
-						}
+				const type = 'type', name = 'name', id = 'id';
+				var _this = this;
+				var url = window.location.toString();
+				this.arr = url.split("?")[1];
+				this.name = this.arr.split("&");
+				for(var i=0; i < this.name.length; i++){
+					if(_this.name[i].split("=")[0] == type){
+						_this.type = _this.name[i].split("=")[1];
 					}
-					this.type = this.arr.split("=")[1];
+					if(_this.name[i].split("=")[0] == name){
+						_this.name = _this.name[i].split("=")[1];
+					}
+				}
+				this.type = this.arr.split("=")[1];
 
-					this.$http.get('https://api.imjad.cn/cloudmusic/?type='+this.type+'&id='+this.id+'&t='+new Date()).then((response) => {
-						this.song = response.body;
-					});
+				this.$http.get('https://api.imjad.cn/cloudmusic/?type=search&s='+this.name+'&t='+new Date()).then((response) => {
+					this.song = response.body;
+				});
 			}
 			// created(){ 
 			// 	var _this = this;
