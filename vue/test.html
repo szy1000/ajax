@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="vue.js"></script>
+	<script src="vue-resource@1.3.4"></script>
+</head>
+<body>
+	<div id="app">
+		<input type="text" v-model="name">
+		<input type="button" value="button" :disabled = "name =='' ? true : false">
+
+		<select name="type" v-model="type" id="" @blur="choose">
+			<option value="1">1</option>
+			<option value="2">2</option>
+			<option value="3">3</option>
+			<option value="4">4</option>
+		</select>
+	</div>
+	<script>
+		var vm = new Vue({
+			el: '#app',
+			data:{
+				name: '',
+				type: 1,
+			},
+			methods: {
+				choose: function(){
+					console.log(this.type)
+				}
+			}
+		})
+	</script>
+</body>
+</html>
