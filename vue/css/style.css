@@ -9,6 +9,9 @@ ul li img{
 	width: 100%;
 	height: 100%;
 }
+ul.comments li{
+	width: 100%;
+}
 .mv li{
 	position: relative;
 	margin-bottom: 15px;
