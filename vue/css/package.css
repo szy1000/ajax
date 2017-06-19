@@ -1,0 +1,50 @@
+.search {
+  padding: 40px 0; }
+  .search #search-form {
+    margin: 0 auto;
+    max-width: 330px;
+    font-size: 0; }
+  .search .select-area {
+    position: relative;
+    float: left;
+    height: 43px;
+    line-height: 43px;
+    overflow: hidden;
+    border: 1px solid #ccc;
+    font-size: 14px;
+    border-right: none;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px; }
+    .search .select-area .select-value {
+      display: block;
+      padding: 0 15px; }
+    .search .select-area select {
+      position: absolute;
+      left: 0;
+      top: 0;
+      opacity: 0;
+      width: 100%;
+      border: red; }
+  .search input {
+    padding: 15px;
+    transition: all 0.30s ease-in-out;
+    -webkit-transition: all 0.30s ease-in-out;
+    -moz-transition: all 0.30s ease-in-out;
+    outline: none;
+    border: 1px solid #ccc; }
+    .search input:focus .search input[type=text] {
+      color: red; }
+    .search input[type=submit] {
+      border-left: none;
+      cursor: not-allowed;
+      border-top-right-radius: 5px;
+      border-bottom-right-radius: 5px; }
+    .search input.active {
+      cursor: pointer;
+      border: 1px solid #5cbef4;
+      background-color: #5cbef4; }
+    .search input:focus {
+      border: #35a5e5 1px solid;
+      box-shadow: 0 0 5px #51cbee;
+      -webkit-box-shadow: 0 0 5px #51cbee;
+      -moz-box-shadow: 0 0 5px #51cbee; }
