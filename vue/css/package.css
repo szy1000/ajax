@@ -26,7 +26,8 @@
       top: 0;
       opacity: 0;
       width: 100%;
-      border: red; }
+      border: red;
+      height: 43px; }
   .search button[type="submit"] {
     height: 43px;
     float: left;
