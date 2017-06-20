@@ -3,10 +3,49 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Document</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 	<script src="vue.js"></script>
 	<script src="vue-resource@1.3.4"></script>
+	<style>
+		html,body{
+			-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+			-webkit-appearance: none;
+		}
+		form{
+			overflow: hidden;
+		}
+		form .select{
+			box-sizing: border-box;
+			float: left;
+			width: 40px;
+			height: 40px;
+			border: 1px solid #ccc;
+		}
+		form input,button{
+			float: left;
+			box-sizing: border-box;
+			height: 40px;
+			border: 1px solid #ccc;
+		}
+		form input{
+			padding: 0 10px;
+			font-size: 15px;
+			margin: auto -2px auto 0px;
+			border:1px solid #ccc;
+			border-left: none;
+			border-right: none;
+			border-radius: 0;
+			-webkit-appearance: none;
+		}
+	</style>
 </head>
 <body>
+	<form action="">
+		<div class="select"></div>
+		<input type="text">
+		<button>button</button>
+	</form>
+
 	<div id="app">
 		<input type="text" v-model="name">
 		<input type="button" value="button" :disabled = "name =='' ? true : false">
@@ -20,10 +59,10 @@
 	</div>
 	<script>
 		window.onload =  function(){
-			alert(this);
+			// alert(this);
 			for(var i=0; i<2; i++){
 				if(i=1){
-					alert(this);
+					// alert(this);
 				}
 			}
 		}

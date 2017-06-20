@@ -1,10 +1,12 @@
 .search {
   padding: 40px 0; }
+  .search .mobile-wrapper {
+    display: flex;
+    justify-content: center; }
   .search #search-form {
-    margin: 0 auto;
-    max-width: 330px;
     font-size: 0; }
   .search .select-area {
+    box-sizing: border-box;
     position: relative;
     float: left;
     height: 43px;
@@ -25,24 +27,46 @@
       opacity: 0;
       width: 100%;
       border: red; }
-  .search input {
+  .search button[type="submit"] {
+    height: 43px;
+    float: left;
+    box-sizing: border-box;
     padding: 15px;
     transition: all 0.30s ease-in-out;
     -webkit-transition: all 0.30s ease-in-out;
     -moz-transition: all 0.30s ease-in-out;
     outline: none;
-    border: 1px solid #ccc; }
-    .search input:focus .search input[type=text] {
-      color: red; }
-    .search input[type=submit] {
-      border-left: none;
-      cursor: not-allowed;
-      border-top-right-radius: 5px;
-      border-bottom-right-radius: 5px; }
-    .search input.active {
+    border: 1px solid #ccc;
+    -webkit-appearance: none;
+    border-left: none;
+    cursor: not-allowed;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px; }
+    .search button[type="submit"].active {
       cursor: pointer;
       border: 1px solid #5cbef4;
-      background-color: #5cbef4; }
+      background-color: #5cbef4;
+      border: #35a5e5 1px solid;
+      box-shadow: 0 0 5px #51cbee;
+      -webkit-box-shadow: 0 0 5px #51cbee;
+      -moz-box-shadow: 0 0 5px #51cbee; }
+  .search input {
+    position: relative;
+    z-index: 1;
+    float: left;
+    box-sizing: border-box;
+    margin: auto -3px;
+    padding: 15px;
+    height: 43px;
+    transition: all 0.30s ease-in-out;
+    -webkit-transition: all 0.30s ease-in-out;
+    -moz-transition: all 0.30s ease-in-out;
+    outline: none;
+    border: 1px solid #ccc;
+    -webkit-appearance: none;
+    border-radius: 0; }
+    .search input:focus .search input[type=text] {
+      color: red; }
     .search input:focus {
       border: #35a5e5 1px solid;
       box-shadow: 0 0 5px #51cbee;
