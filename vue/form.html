@@ -29,44 +29,46 @@
 	</div>
 
 	<script>
-		new Vue({
-			el: '#app',
-			data:{
-				id: 0,
-				type: 'song',
-				mv: null,
-				mp3: null,
-				name: ''
-			},
-			methods: {
-				search: function () {
-					if( this.name == ''){ return false};
-					this.$http.get('https://api.imjad.cn/cloudmusic/?type=search&s='+this.name+'&t='+new Date()).then((response) => {
-						this.mp3 = response.body;
-						this.id = this.mp3.result.songs[0].id;
-						console.log('song:'+this.id);
-					});
-					this.$http.get('https://api.imjad.cn/cloudmusic/?type=search&search_type=1004&s='+this.name+'&t='+new Date()).then((response) => {
-						this.mv = response.body;
-						this.id = this.mv.result.mvs[0].id;
-						console.log('mv:'+this.id);
-					})
+		window.onload = function(){
+			var app = new Vue({
+				el: '#app',
+				data:{
+					id: 0,
+					type: 'song',
+					mv: null,
+					mp3: null,
+					name: ''
 				},
-				choseType: function(){
-					console.log(this.type);
-					if(this.name == ''){ return };
-					this.type = document.getElementById('select').value;
-					if(this.type == 'song'){
-						this.id = this.mp3.result.songs[0].id;
-						console.log('song:'+ this.id);
-					}
-					if(this.type == 'mv'){
-						this.id = this.mv.result.mvs[0].id;
-						console.log('mv:'+ this.id);
-					}
+				methods: {
+					search: function () {
+						if( this.name == ''){ return false};
+						this.$http.get('https://api.imjad.cn/cloudmusic/?type=search&s='+this.name+'&t='+new Date()).then((response) => {
+							this.mp3 = response.body;
+							this.id = this.mp3.result.songs[0].id;
+							console.log('song:'+this.id);
+						});
+						this.$http.get('https://api.imjad.cn/cloudmusic/?type=search&search_type=1004&s='+this.name+'&t='+new Date()).then((response) => {
+							this.mv = response.body;
+							this.id = this.mv.result.mvs[0].id;
+							console.log('mv:'+this.id);
+						})
+					},
+					choseType: function(){
+						console.log(this.type);
+						if(this.name == ''){ return };
+						this.type = document.getElementById('select').value;
+						if(this.type == 'song'){
+							this.id = this.mp3.result.songs[0].id;
+							console.log('song:'+ this.id);
+						}
+						if(this.type == 'mv'){
+							this.id = this.mv.result.mvs[0].id;
+							console.log('mv:'+ this.id);
+						}
+					},
 				},
-			},
-		})
+			})
+		}
 	</script>
 </body>
 </html>
