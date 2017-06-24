@@ -59,6 +59,11 @@ ul.comments li{
 		margin: 0 1%;
 		width: 48%;
 	}
+	.song .song-items li{
+    box-sizing: border-box;
+    margin: 0 1%;
+    width: 48%;
+	}
 	.comments{
 		padding: 0 15px;
 	}
@@ -76,6 +81,11 @@ ul.comments li{
 		box-sizing: border-box;
 		margin: 0 1% 15px 1%;
 		width: 98%;
+	}
+	.song .song-items li{
+    box-sizing: border-box;
+    margin: 0 1%;
+    width: 48%;
 	}
 	.comments{
 		padding: 0 15px;

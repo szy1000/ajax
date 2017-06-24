@@ -18,7 +18,7 @@
 
 			<div v-if="this.mv"> MV返回总数: {{this.mv.result.mvCount}}</div>
 			<ul v-if="this.mv" class="mv">
-				<li v-for="(item,index) in this.mv.result.mvs" id="item.id" @click="searchMV(item.id)" class="item">
+				<li v-for="(item,index) in this.mv.result.mvs" @click="searchMV(item.id)" class="item">
 					<img :src="item.cover" alt="">
 					<p class="sing">演唱者：{{item.artistName}}</p>
 					<p class="playCount">播放热度： {{item.playCount}}</p>
