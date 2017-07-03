@@ -38,7 +38,7 @@
 		height: 43px;
 		float: left;
 		box-sizing: border-box;
-		padding: 15px;
+		padding: 0 15px;
 		transition: all 0.30s ease-in-out;
 		-webkit-transition: all 0.30s ease-in-out;
 		-moz-transition: all 0.30s ease-in-out;
@@ -51,6 +51,7 @@
 		&.active{
 			cursor: pointer;
 			border: 1px solid#5cbef4;
+			color: #fff;
 			background-color: #5cbef4;
 			border:#35a5e5 1px solid;
 			box-shadow: 0 0 5px rgba(81, 203, 238, 1);
@@ -82,5 +83,31 @@
 			-webkit-box-shadow: 0 0 5px rgba(81, 203, 238, 1);
 			-moz-box-shadow: 0 0 5px rgba(81, 203, 238, 1);
 		}
+	}
+}
+
+.song{
+	.media{
+		margin-top: 15px;
+		&,.media-body{
+			overflow: hidden;
+			zoom: 1;
+		}
+		.media-body{
+			display: table-cell;
+			h4{
+				margin: 0;
+			}
+		}
+		.media-left{
+			display: table-cell;
+			vertical-align: top;
+			width: 64px;
+			height: 64px;
+			padding-right: 10px;
+		}
+	}
+	.comments{
+		padding: 0 15px;
 	}
 }

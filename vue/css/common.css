@@ -15,15 +15,18 @@ ul li{
 	width: 1200px;
 }
 .clearfix:after { 
-    visibility: hidden; 
+    display: block;
+    content: "";
+    clear: both;
+} 
+.clearfix { display: inline-table; } 
+.clearfix:before{
+	visibility: hidden; 
     display: block; 
     font-size: 0; 
     content: " "; 
-    clear: both; 
     height: 0; 
-} 
-.clearfix { display: inline-table; } 
-
+}
 .pull-right {
   float: right !important;
 }
