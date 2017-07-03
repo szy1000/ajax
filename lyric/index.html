@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="data.js"></script>
+	<script>
+		function zip(arrays) {
+    return arrays[0].map(function(_,i){
+		        return arrays.map(function(array){return array[i]})
+		    });
+		}
+
+		window.onload = function () {
+			var oUl = document.getElementById('ul');
+			var audio = document.getElementById('audio');
+			
+			// var test = 'dasdas?dasd?adsasd?dasdas?DASda';
+			// var next = test.split('?');
+			// for(var i=0;i<next.length;i++){
+			// 	var li = document.createElement('li');
+			// 	li.innerHTML = next[i];
+			// 	oUl.appendChild(li);
+			// }
+			var reg = /\[\d{2}:\d{2}.\d{1,3}\]/g; //匹配时间
+			var reg2 = /\s|\[|\]|\:/g;
+
+			var arr = lyric.toString().match(reg);
+			var arr22 = [];
+			for(var i=0; i<arr.length;i++){
+				arr22.push(parseInt(arr[i].replace(reg2,'')));
+			}
+
+			console.log(arr22);
+
+			var arr2 = lyric.toString().trim().replace(reg,',');
+			var arr3 = arr2.split(',');
+
+
+			// for(var i=0;i<arr3.length;i++){
+			// 	var li = document.createElement('li');
+			// 	li.innerHTML = arr3[i];
+			// 	oUl.appendChild(li);
+			// }
+			var lyrics = zip([arr22,arr3]);
+			console.log(lyrics)
+			console.log(lyrics[2][0]);
+			audio.ontimeupdate = function(){
+					console.log(lyrics[10][0])
+				for(var i=0;i<lyrics.length;i++){
+					if( parseInt(audio.currentTime+8) > lyrics[i][0]){
+						// console.log(audio.currentTime);
+						var aaa = lyrics[i][1];
+
+						for(var j=0;j<arr3.length;j++){
+							oUl.innerHTML = '';
+							var li = document.createElement('li');
+							li.innerHTML = aaa;
+							oUl.appendChild(li);
+						}
+					}
+				}
+			}
+			
+		};
+
+	</script>
+</head>
+<body>
+	<audio src="tonghua.mp3" controls id="audio"></audio>
+	<ul id="ul">
+		
+	</ul>
+</body>
+</html>
