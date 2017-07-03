@@ -4,6 +4,13 @@
 	<meta charset="UTF-8">
 	<title>Document</title>
 	<script>
+		var a = 103;
+		if(a/100 ==1){
+			a = 60;
+		}else{
+			console.log('a');
+		}
+		console.log(Math.floor(a/100));
 		function zip(arrays) {
     return arrays[0].map(function(_,i){
 		        return arrays.map(function(array){return array[i]})

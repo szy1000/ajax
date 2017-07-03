@@ -21,28 +21,50 @@
 			var arr = lyric.toString().match(reg);
 			var arr22 = [];
 			for(var i=0; i<arr.length;i++){
-				arr22.push(parseInt(arr[i].replace(reg2,'')));
-			}
+				var tmp = parseInt(arr[i].replace(reg2,''));
+				// if(tmp /100 == 0){
+				// 	tmp = tmp;
+				// }
+				if(Math.floor(tmp/100) == 1){
+					var flo = tmp/100 - 1;
+					var flo = parseInt(flo.toFixed(2)*100);
+					tmp = 60 + flo;
+				}
+				else if(Math.floor(tmp/100) == 2){
+					var flo = tmp/100 - 1;
+					var flo = parseInt(flo.toFixed(2)*100);
+					tmp = 20 + flo;
+				}
+				else if(Math.floor((tmp/100)) ==3){
+					console.warn(tmp);
+					var flo = tmp/100 - 1;
+					var flo = parseInt(flo.toFixed(2)*100);
+					console.error(flo)
+					tmp =  -20 + flo;
+				}
 
-			console.log(arr22);
+				// else if(Math.floor((tmp/100)) ==4){
+				// 	console.warn(tmp);
+				// 	var flo = tmp/100 - 1;
+				// 	var flo = parseInt(flo.toFixed(2)*100);
+				// 	console.error(flo)
+				// 	tmp =  -60 + flo;
+				// }
+				
+				console.log(tmp);
+				arr22.push(parseInt(tmp));
+			}
 
 			var arr2 = lyric.toString().trim().replace(reg,',');
 			var arr3 = arr2.split(',');
 
-
-			// for(var i=0;i<arr3.length;i++){
-			// 	var li = document.createElement('li');
-			// 	li.innerHTML = arr3[i];
-			// 	oUl.appendChild(li);
-			// }
 			var lyrics = zip([arr22,arr3]);
 			console.log(lyrics)
 			console.log(lyrics[2][0]);
 			audio.ontimeupdate = function(){
-					console.log(lyrics[10][0])
 				for(var i=0;i<lyrics.length;i++){
-					if( parseInt(audio.currentTime+8) > lyrics[i][0]){
-						// console.log(audio.currentTime);
+					if( parseInt(audio.currentTime+7) > lyrics[i][0]){
+						console.log(audio.currentTime);
 						var aaa = lyrics[i][1];
 
 						for(var j=0;j<arr3.length;j++){
@@ -62,7 +84,6 @@
 <body>
 	<audio src="tonghua.mp3" controls id="audio"></audio>
 	<ul id="ul">
-		
 	</ul>
 </body>
 </html>
