@@ -64,9 +64,11 @@
 				},
 				methods:{
 					searchSong: function(song_id){
+						
 						this.$http.get('https://api.imjad.cn/cloudmusic/?type=song&id='+song_id+'&br=128000&limit=20&t='+new Date()).then((response) => {
 							this.mp3 = response.body;
 						})
+
 						this.$http.get('https://api.imjad.cn/cloudmusic/?type=comments&id='+song_id+'&br=128000&limit=20&t='+new Date()).then((response) => {
 							this.comments = response.body;
 							console.log(this.comments);
