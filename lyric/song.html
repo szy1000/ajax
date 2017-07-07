@@ -43,9 +43,7 @@
 		window.onload = function () {
 			var song = document.getElementById('song');
 			var conf = document.getElementById('confire');
-
 			var oUl = document.getElementById('ul');
-
 
 			conf.onclick = function(){
 				if(song.value == ''){
@@ -73,7 +71,6 @@
 			oUl.onclick = function(e){
 				var oevent = e || window.event;
 				var target = oevent.srcElement || oevent.target;
-
 				if(target.nodeName.toLowerCase() == 'img'){
 					ajax({
 						type:"get",
@@ -89,22 +86,23 @@
 								url: "https://api.imjad.cn/cloudmusic/?type=lyric&id="+target.getAttribute('data-id')+'&br=128000',
 								async:true,
 								success: function(data){
-										var lyric = JSON.stringify(data.lrc.lyric);
-									// var audio = document.getElementById('audio');
+									var lyric = JSON.stringify(data.lrc.lyric);
 
 					      	var lyricContainer = document.getElementById('lyricContainer');
 							    //显示歌词的元素
 
 							    var arr_lyric = [];
 									var reg = /\[\d{2}:\d{2}.\d{1,3}\]/g;
-									var reg2 = /"|\[\d{2}:\d{2}.\d{1,3}\]/g;
+									var reg2 = /\[\d{2}:\d{2}.\d{1,3}\]/g;
 							    // var reg = /\\r?\\n/g;
-									var arr_lyric = lyric.split(/\\n/g);
+							    var arr_lyric = lyric.slice(1,-1);
 
+									var arr_lyric = arr_lyric.split(/\\n/g);
 									var arr_lyric_time = [];
 									var arr_lyric_body = [];
 
 									for(var i=0;i<arr_lyric.length-1;i++){
+										// console.log(arr_lyric[i]);
 									 	arr_lyric_time.push(arr_lyric[i].match(reg));
 
 									 	arr_lyric_body.push(arr_lyric[i].replace(reg2, ''));
@@ -114,8 +112,14 @@
 
 									var change_time =[];
 
+
 									arr_lyric_time.forEach( function(arr, index) {
-										var arr2 = arr.toString();
+										var arr2;
+										if(arr != null){
+											arr2 = arr.toString();
+										}else{
+											arr2 = '[00:00.00]';
+										}
 
 										var t = arr2.slice(1, -1).split(':');
 
@@ -124,9 +128,9 @@
 									for(var i=0;i<arr_lyric.length;i++){
 										// console.log(arr_lyric[i])
 									}
-									audio.ontimeupdate = function(){
+									oAudio.ontimeupdate = function(){
 										for(var i=0;i<arr_lyric.length;i++){
-											if(this.currentTime > arr_lyric[i][0]){
+											if(this.currentTime >= arr_lyric[i][0]){
 												lyricContainer.innerHTML = '';
 												var li = document.createElement('li');
 												li.innerText = arr_lyric[i][1];
@@ -158,78 +162,6 @@
 					});
 				}
 			}
-
-			// oUl.onclick = function(e){
-			// 	var oevent = e || window.event;
-			// 	var target = oevent.srcElement || oevent.target;
-
-			// 	if(target.nodeName.toLowerCase() == 'img'){
-			// 		ajax({
-			// 			type:"get",
-			// 			url: "https://api.imjad.cn/cloudmusic/?type=lyric&id="+target.getAttribute('data-id')+'&br=128000',
-			// 			async:true,
-			// 			success: function(data){
-			// 				var lyric = JSON.stringify(data.lrc.lyric);
-			// 				// var audio = document.getElementById('audio');
-
-			//       	var lyricContainer = document.getElementById('lyricContainer');
-			// 		    //显示歌词的元素
-
-			// 		    var arr_lyric = [];
-			// 				var reg = /\[\d{2}:\d{2}.\d{1,3}\]/g;
-			// 				var reg2 = /"|\[\d{2}:\d{2}.\d{1,3}\]/g;
-			// 		    // var reg = /\\r?\\n/g;
-			// 				var arr_lyric = lyric.split(/\\n/g);
-
-			// 				var arr_lyric_time = [];
-			// 				var arr_lyric_body = [];
-
-			// 				for(var i=0;i<arr_lyric.length-1;i++){
-			// 				 	arr_lyric_time.push(arr_lyric[i].match(reg));
-
-			// 				 	arr_lyric_body.push(arr_lyric[i].replace(reg2, ''));
-			// 					var li = document.createElement('li');
-			// 					li.innerText = arr_lyric[i];
-			// 					lyricContainer.appendChild(li)
-			// 				}
-
-			// 				var mins_reg = /\d{2}:/g;
-
-			// 				var change_time =[];
-
-			// 				arr_lyric_time.forEach( function(arr, index) {
-			// 					var arr2 = arr.toString();
-
-			// 					var t = arr2.slice(1, -1).split(':');
-
-			// 					arr_lyric.push([parseInt(t[0], 10) * 60 + parseFloat(t[1]), arr_lyric_body])
-			// 				});
-			// 				for(var i=0;i<arr_lyric.length;i++){
-			// 					console.log(arr_lyric[i])
-			// 				}
-			// 				// for(var i=0;i<arr_lyric_time.length;i++){
-			// 				// 	console.log(arr_lyric_time[i].toString());
-			// 				// 	// change_time.push(arr_lyric_time[i].match(mins_reg));
-			// 				// 	console.log(change_time[i]);
-			// 				// }
-			// 		    // lyricContainer.innerHTML = arr_lyric
-
-			// 				//监听ontimeupdate事件
-			// 				// audio.ontimeupdate = function(e) {
-			// 				//     //遍历所有歌词，看哪句歌词的时间与当然时间吻合
-			// 				//     for (var i = 0, l = lyric.length; i < l; i++) {
-			// 				//         if (this.currentTime /*当前播放的时间*/ > lyric[i][0]) {
-			// 				//             //显示到页面
-			// 				//             lyricContainer.textContent = that.lyric[i][1];
-			// 				//         };
-			// 				//     };
-			// 				// };
-			// 			}
-			// 		})
-
-			// 	}
-			// }
-
 			function parseLyric(text) {
 		    //将文本分隔成一行一行，存入数组
 		    var lines = text.split('\n'),
@@ -271,7 +203,7 @@
 	</ul>
 	<div class="wrapper">
 		<div id="cont">
-			<input type="text" id="song" placeholder="请输入歌曲名称" value="童话">
+			<input type="text" id="song" placeholder="请输入歌曲名称" value="宝贝">
 			<button id="confire">确定</button>
 		</div>
 		<!-- <div id="lyricContainer"></div> -->
