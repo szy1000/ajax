@@ -40,3 +40,5 @@ vue
 [戳我!](https://szy1000.github.io/ajax/vue/)
 
 
+https://github.com/szy1000/ajax.git
+
